@@ -1,4 +1,4 @@
-module sg-k8s-cluster
+module sgk
 
 require (
 	github.com/briandowns/spinner v0.0.0-20190126160308-b298438e1f0d
