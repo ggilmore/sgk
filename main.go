@@ -20,6 +20,8 @@ func main() {
 	var project string
 
 	app := cli.NewApp()
+	app.Name = "sgk"
+	app.Usage = "Quickly manage scratch GCP K8s clusters to test Sourcegraph on"
 
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
