@@ -62,6 +62,11 @@ func main() {
 					Usage:  "name of the machine type to use in the cluster",
 					EnvVar: "MACHINE_TYPE",
 				},
+				cli.BoolTFlag{
+					Name:   "activate",
+					Usage:  "Activate the k8s credentials for the cluster after creation",
+					EnvVar: "ACTIVATE",
+				},
 			},
 			Action: func(c *cli.Context) error {
 				numNodes := c.Int("num-nodes")
@@ -80,6 +85,18 @@ func main() {
 				}
 
 				cfmt.Successf("Created %q!", name)
+
+				err = runGCloud("container", "clusters", "get-credentials",
+					name,
+					fmt.Sprintf("--project=%s", project),
+					fmt.Sprintf("--zone=%s", zone),
+				)
+
+				if err != nil {
+					return cli.NewExitError(err, 1)
+				}
+
+				cfmt.Successf("Fetched credentials for %q!", name)
 				return nil
 			},
 		},
@@ -109,7 +126,11 @@ func main() {
 					return cli.NewExitError(err, 1)
 				}
 
-				cfmt.Successf("Deleted %q!", name)
+				cfmt.Successf("Deleted %q!\n", name)
+
+				url := fmt.Sprintf("https://console.cloud.google.com/compute/disks?organizationId=1006954638239&project=%s", project)
+				cfmt.Infof("Visit %q to delete the disks that were used by %q\n", url, name)
+
 				return nil
 			},
 		},
