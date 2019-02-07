@@ -167,7 +167,7 @@ func runGCloud(args ...string) error {
 
 	s.Color("bgBlack", "white")
 	cmdStr := fmt.Sprintf("gcloud %s", strings.Join(args, " "))
-	s.Suffix = cfmt.Sinfof("  :Running %q", cmdStr)
+	s.Prefix = cfmt.Sinfof("Running %q:  ", cmdStr)
 
 	s.Start()
 	defer s.Stop()
