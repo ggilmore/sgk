@@ -86,7 +86,11 @@ func main() {
 					return cli.NewExitError(err, 1)
 				}
 
-				cfmt.Successf("Created %q!", name)
+				cfmt.Successf("Created %q!\n", name)
+
+				if !c.BoolT("activate") {
+					return nil
+				}
 
 				err = runGCloud("container", "clusters", "get-credentials",
 					name,
@@ -160,7 +164,7 @@ func confirm(prompt string) (bool, error) {
 func runGCloud(args ...string) error {
 	s := spinner.New(spinner.CharSets[12], 150*time.Millisecond)
 
-	s.Color("bold", "white")
+	s.Color("bgBlack", "white")
 	cmdStr := fmt.Sprintf("gcloud %s", strings.Join(args, " "))
 	s.Suffix = cfmt.Sinfof("  :Running %q", cmdStr)
 
