@@ -1,4 +1,4 @@
-module sgk
+module github.com/ggilmore/sgk
 
 require (
 	github.com/briandowns/spinner v0.0.0-20190126160308-b298438e1f0d
