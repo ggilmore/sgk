@@ -50,7 +50,7 @@ func main() {
 	app.Commands = []cli.Command{
 		{
 			Name:  "create",
-			Usage: "create a new k8s cluster",
+			Usage: "create a new k8s cluster in GCP",
 			Flags: []cli.Flag{
 				cli.IntFlag{
 					Name:   "num-nodes",
@@ -98,7 +98,7 @@ func main() {
 					return cli.NewExitError(err, 1)
 				}
 
-				cfmt.Successf("Fetched credentials for %q!", name)
+				cfmt.Infof("Fetched credentials for %q.", name)
 				return nil
 			},
 		},
