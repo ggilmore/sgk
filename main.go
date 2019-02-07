@@ -49,7 +49,7 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "create",
+			Name:  "create, up",
 			Usage: "create a new k8s cluster in GCP",
 			Flags: []cli.Flag{
 				cli.IntFlag{
@@ -106,7 +106,7 @@ func main() {
 			},
 		},
 		{
-			Name:  "delete",
+			Name:  "delete, destroy, down",
 			Usage: "delete a k8s cluster from GCP",
 			Action: func(c *cli.Context) error {
 				confirmed, err := confirm(fmt.Sprintf("[%s] in [%s] will be deleted.\nDo you want to continue?", name, project))
