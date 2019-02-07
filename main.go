@@ -97,12 +97,11 @@ func main() {
 					fmt.Sprintf("--project=%s", project),
 					fmt.Sprintf("--zone=%s", zone),
 				)
-
 				if err != nil {
 					return cli.NewExitError(err, 1)
 				}
 
-				cfmt.Infof("Fetched credentials for %q.", name)
+				cfmt.Infof("Fetched credentials for %q.\n", name)
 				return nil
 			},
 		},
